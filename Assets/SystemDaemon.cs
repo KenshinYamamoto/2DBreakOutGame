@@ -51,7 +51,7 @@ public class SystemDaemon : SingletonMonoBehaviour<SystemDaemon>
 
 	static public bool isStoried = false; //ストーリーを再生したかどうか
 
-	static public int stageNumber; //ステージの番号(1～6)
+	static public int stageNumber = 1; //ステージの番号(1～6)
 
 	//ステージをクリアしているかどうか
 	static public bool clear1_1 = false;
@@ -60,6 +60,8 @@ public class SystemDaemon : SingletonMonoBehaviour<SystemDaemon>
 	static public bool clear1_4 = false;
 	static public bool clear1_5 = false;
 	static public bool clear1_6 = false;
+
+	static public bool isFromStoryButton = false; //「ストーリーを見る」ボタンから来たかどうか
 
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// アウェイク ※ここは特殊なので慣れるまで変更・追加しないでください
@@ -89,7 +91,7 @@ public class SystemDaemon : SingletonMonoBehaviour<SystemDaemon>
     {
 		// タイマー クリアー
 		TimeCounter = 0.0f;
-		
+
 		// 例：スコアの初期化
 		//Score = 0;
     }
@@ -102,7 +104,7 @@ public class SystemDaemon : SingletonMonoBehaviour<SystemDaemon>
     {
 		// タイマー
 		TimeCounter += Time.deltaTime;
-    }
+	}
 
     //--------------------------------------------------------------------------------
     // シーン切り替え

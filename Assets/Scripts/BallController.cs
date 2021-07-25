@@ -5,18 +5,21 @@ using UnityEngine.UI;
 
 public class BallController : MonoBehaviour
 {
-    public float initialVelocityY = 200.0f; //Y方向に打ち出す速度
+    static public int stateNumber = 0; //ステートナンバー
+
+    public float initialVelocityY = 150f; //Y方向に打ち出す速度
     public AudioClip brickHit; //ブロックに当たった時の音
     public AudioClip wall_paddleHit; //壁とPaddleに当たった時の音
     public Text countDownText; //カウントダウンを表示するテキスト
+    public GameObject resultText; //ClearかGameOverかを入れるテキスト
 
     private Rigidbody2D rb2D; //RigidBody2Dを入れる変数
     private AudioSource audioSource; //AudioSourceを入れる変数
     private float initialVelocityX; //X方向に打ち出す速度
     private int twoNumber; //打ち出す方向を左か右か決める変数
-    private float countDown = 3.0f; //カウントダウンする変数
-    private int stateNumber = 0; //ステートナンバー
-    //private bool isCalled = false; //1回だけ実行するための判定
+    private float countDown = 3.0f; //カウントダウン(3秒前)
+    private float countUp = 0f; //カウントアップ
+    private bool isCalled = false; //1回だけ実行するための判定
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +27,9 @@ public class BallController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>(); //RigidBody2Dを入れる
         audioSource = GetComponent<AudioSource>(); //AudioSourceを入れる
         countDownText.text = "3"; //3を表示する
+        resultText.GetComponent<Text>().text = ""; //resultTextをリセット
+
+        resultText.SetActive(false); //resultTextを非表示にする(デフォルト)
 
         twoNumber = Random.Range(0, 2); //0か1をtwoNumberに入れる
 
@@ -92,6 +98,92 @@ public class BallController : MonoBehaviour
                         rb2D.AddForce(new Vector2(initialVelocityX, initialVelocityY)); //ボールに力を加えて動かす
 
                         SystemDaemon.isGameStarted = true; //ゲームを動かす
+
+                        countDown = 0f; //時間のリセット
+                    }
+
+                    if(GameDirectorController.brickQuantity == 0) //ブロックがなくなったら
+                    {
+                        stateNumber = 5; //case5に進む
+                    }
+                }
+                break;
+
+            case 4: //ゲームオーバー
+                {
+                    if (!isCalled)
+                    {
+                        SystemDaemon.isGameStarted = false; //ゲームを止める
+
+                        resultText.GetComponent<Text>().color = new Color(0f, 0f, 1f, 1f);//字の色を青にする
+                        resultText.GetComponent<Text>().text = "GAME OVER"; //GameOverを表示
+                        resultText.SetActive(true); //resultTextを表示する
+
+                        isCalled = true; //ロックをかける
+                    }
+
+                    countUp += Time.deltaTime; //時間の更新
+
+                    if (countUp >= 2f) //2秒たったら
+                    {
+                        SystemDaemon.LoadScene("Title"); //タイトルに戻る
+
+                        stateNumber = 0; //ステートナンバーのリセット
+                    }
+                }break;
+
+            case 5: //クリア
+                {
+                    if (!isCalled)
+                    {
+                        SystemDaemon.isGameStarted = false; //ゲームを止める
+
+                        resultText.GetComponent<Text>().color = new Color(1f, 1f, 0f, 1f);//字の色を黄にする
+                        resultText.GetComponent<Text>().text = "CLEAR"; //Clearを表示
+                        resultText.SetActive(true); //resultTextを表示する
+
+                        switch (SystemDaemon.stageNumber) //ステージの番号による分岐
+                        {
+                            case 1: //ステージ1-1だったら
+                                {
+                                    SystemDaemon.clear1_1 = true;
+                                }break;
+                            case 2: //ステージ1-2だったら
+                                {
+                                    SystemDaemon.clear1_2 = true;
+                                }
+                                break;
+                            case 3: //ステージ1-3だったら
+                                {
+                                    SystemDaemon.clear1_3 = true;
+                                }break;
+                            case 4: //ステージ1-4だったら
+                                {
+                                    SystemDaemon.clear1_4 = true;
+                                }
+                                break;
+                            case 5: //ステージ1-5だったら
+                                {
+                                    SystemDaemon.clear1_5 = true;
+                                }
+                                break;
+                            case 6: //ステージ1-6だったら
+                                {
+                                    SystemDaemon.clear1_6= true;
+                                }
+                                break;
+                            default:break;
+                        }
+
+                        isCalled = true; //ロックをかける
+                    }
+
+                    countUp += Time.deltaTime; //時間の更新
+
+                    if (countUp >= 2f) //2秒たったら
+                    {
+                        SystemDaemon.LoadScene("Title"); //タイトルに戻る
+                        stateNumber = 0; //ステートナンバーのリセット
                     }
                 }
                 break;
@@ -105,6 +197,8 @@ public class BallController : MonoBehaviour
             audioSource.clip = brickHit; //brickHitの音をセットする
             audioSource.Play(); //音を再生する
             Destroy(collision.gameObject); //ブロックを壊す
+
+            GameDirectorController.brickQuantity--; //ブロックを壊したら、1減らす
         }
         if(collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Paddle")
         {

@@ -639,7 +639,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 562025833}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -648,7 +648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 350, y: 0}
+  m_AnchoredPosition: {x: -286, y: 0}
   m_SizeDelta: {x: 500, y: 632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &562025835
@@ -671,7 +671,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: af634f8289f98eb4a8c73b2b72a2fcd6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 67489012842c1654fb23c6edfc4db0e2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -920,7 +920,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 651142405}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1238659245}
+        m_TargetAssemblyTypeName: StoryController, Assembly-CSharp
+        m_MethodName: OnSkipButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &651142405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,7 +1136,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 730658694}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1238659245}
+        m_TargetAssemblyTypeName: StoryController, Assembly-CSharp
+        m_MethodName: OnYesButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &730658694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,7 +1225,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 91f5dca2bee1e0443be3e8a189a16c7e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c22a94eb530caaa45917aca84d91d8a0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1226,7 +1250,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954823226}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1235,7 +1259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 350, y: 0}
+  m_AnchoredPosition: {x: -462, y: 0}
   m_SizeDelta: {x: 500, y: 632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1015044269
@@ -1308,7 +1332,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &1015044272
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1399,7 +1423,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1115842248}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1238659245}
+        m_TargetAssemblyTypeName: StoryController, Assembly-CSharp
+        m_MethodName: OnNoButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1115842248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1522,14 +1558,30 @@ MonoBehaviour:
   deltaArrow: {fileID: 631394056}
   nameText: {fileID: 1382743844}
   kohakuImage: {fileID: 207094218}
-  yukoImage: {fileID: 562025833}
   misakiImage: {fileID: 954823226}
+  yukoImage: {fileID: 562025833}
+  skipButton: {fileID: 651142402}
   kohakuImages:
   - {fileID: 21300000, guid: c3c5287acb99cf24e8190fe7fbbb7c80, type: 3}
-  yukoImages:
-  - {fileID: 21300000, guid: af634f8289f98eb4a8c73b2b72a2fcd6, type: 3}
+  - {fileID: 21300000, guid: 8c459f7601e3520438d69b1e4c32a225, type: 3}
+  - {fileID: 21300000, guid: db5c8f346cd1a2a49a4684ad95116e4c, type: 3}
+  - {fileID: 21300000, guid: e3460a9864860704ab973fd3cad9876e, type: 3}
+  - {fileID: 21300000, guid: 16afe143f0269f04693d1893ca12f7bc, type: 3}
+  - {fileID: 21300000, guid: aafe5b223dec35c429dd22d3289186a3, type: 3}
   misakiImages:
   - {fileID: 21300000, guid: 91f5dca2bee1e0443be3e8a189a16c7e, type: 3}
+  - {fileID: 21300000, guid: f7513cdae4f5e7449abf68fdb71f53dc, type: 3}
+  - {fileID: 21300000, guid: 810b2d7f4c47cdc4e8f14f19b9375c5d, type: 3}
+  - {fileID: 21300000, guid: 4687ebc6bdb353340b96110df598e0f2, type: 3}
+  - {fileID: 21300000, guid: c22a94eb530caaa45917aca84d91d8a0, type: 3}
+  - {fileID: 21300000, guid: 78f2353e24f23394390c8672b2b8b5e7, type: 3}
+  yukoImages:
+  - {fileID: 21300000, guid: af634f8289f98eb4a8c73b2b72a2fcd6, type: 3}
+  - {fileID: 21300000, guid: c8abb26ac8e8ec24dbcf1bdc7a7f6eac, type: 3}
+  - {fileID: 21300000, guid: f768e64555ffa1b4c86f64cb29313920, type: 3}
+  - {fileID: 21300000, guid: f6a6855a2e41e1c49bdb3d5d0b89759f, type: 3}
+  - {fileID: 21300000, guid: 67489012842c1654fb23c6edfc4db0e2, type: 3}
+  - {fileID: 21300000, guid: a7ee6c66958ed744ba27a4db0c298d5d, type: 3}
   displayspeed: 30
 --- !u!1 &1382743844
 GameObject:
@@ -1601,7 +1653,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &1382743847
 CanvasRenderer:
   m_ObjectHideFlags: 0

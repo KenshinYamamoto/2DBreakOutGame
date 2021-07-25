@@ -111,7 +111,7 @@ public class ButtonController : MonoBehaviour
         {
             SystemDaemon.isStoried = true;
 
-            SystemDaemon.LoadScene("SrotyScene");
+            SystemDaemon.LoadScene("StoryScene");
         }
         else
             SystemDaemon.LoadScene("GameScene");
@@ -204,6 +204,8 @@ public class ButtonController : MonoBehaviour
 
     public void OnGoStorySceneButton()
     {
+        SystemDaemon.isFromStoryButton = true;
+
         SystemDaemon.LoadScene("StoryScene");
     }
 }
