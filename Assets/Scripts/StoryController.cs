@@ -65,7 +65,6 @@ public class StoryController : MonoBehaviour
         {
             skipButton.SetActive(false); //スキップボタンを表示しない
         }
-        SystemDaemon.isFromStoryButton = false; //SystemDaemonのisFromStoryButtonをリセットする
     }
 
     // Update is called once per frame

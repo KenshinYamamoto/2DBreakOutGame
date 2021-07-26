@@ -47,21 +47,21 @@ public class SystemDaemon : SingletonMonoBehaviour<SystemDaemon>
 	// 以下に、シーンを跨いで保存したい変数を入れる。例：スコアなど
 	//static public int Score;
 
-	static public bool isGameStarted = false; //ゲームが始まっているかどうか
+	static public bool isGameStarted; //ゲームが始まっているかどうか
 
-	static public bool isStoried = false; //ストーリーを再生したかどうか
+	static public bool isStoried; //ストーリーを再生したかどうか
 
-	static public int stageNumber = 1; //ステージの番号(1～6)
+	static public int stageNumber; //ステージの番号(1～6)
 
 	//ステージをクリアしているかどうか
-	static public bool clear1_1 = false;
-	static public bool clear1_2 = false;
-	static public bool clear1_3 = false;
-	static public bool clear1_4 = false;
-	static public bool clear1_5 = false;
-	static public bool clear1_6 = false;
+	static public bool clear1_1;
+	static public bool clear1_2;
+	static public bool clear1_3;
+	static public bool clear1_4;
+	static public bool clear1_5;
+	static public bool clear1_6;
 
-	static public bool isFromStoryButton = false; //「ストーリーを見る」ボタンから来たかどうか
+	static public bool isFromStoryButton; //「ストーリーを見る」ボタンから来たかどうか
 
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// アウェイク ※ここは特殊なので慣れるまで変更・追加しないでください
@@ -94,7 +94,21 @@ public class SystemDaemon : SingletonMonoBehaviour<SystemDaemon>
 
 		// 例：スコアの初期化
 		//Score = 0;
-    }
+
+		isGameStarted = false; //ゲームが始まっているかどうか
+		stageNumber = 0; //ステージの番号(1～6)
+		isFromStoryButton = false; //「ストーリーを見る」ボタンから来たかどうか
+
+		isStoried = false; //ストーリーを見たかどうか
+
+		//ステージをクリアしているかどうか
+		clear1_1 = false;
+		clear1_2 = false;
+		clear1_3 = false;
+		clear1_4 = false;
+		clear1_5 = false;
+		clear1_6 = false;
+	}
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// アップデート ※ここで何らかのシステム的な監視をする処理をします。

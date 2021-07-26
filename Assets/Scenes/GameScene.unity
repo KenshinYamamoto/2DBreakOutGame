@@ -342,6 +342,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
+  - {fileID: 2598724032655252364, guid: 6cb96b1fa592bb342ab818a11188c03f, type: 3}
+  - {fileID: 8967678024588607685, guid: b25146522a3990446a304bae2f9abd39, type: 3}
+  - {fileID: 1497067567512324662, guid: e17086fe799c7cf4eb67720f189edba1, type: 3}
+  - {fileID: 2141040505146335274, guid: bacb8284c9b64874a8626363adb915d7, type: 3}
+  - {fileID: 4518450502634345777, guid: e1616c2ce3b2f234f89c8808a209e94d, type: 3}
   - {fileID: 6613643163168656974, guid: d0345be266e4b9942b6394b53eced7c8, type: 3}
 --- !u!1001 &679546036
 PrefabInstance:

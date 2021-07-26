@@ -7,12 +7,12 @@ public class BallController : MonoBehaviour
 {
     static public int stateNumber = 0; //ステートナンバー
 
-    public float initialVelocityY = 150f; //Y方向に打ち出す速度
     public AudioClip brickHit; //ブロックに当たった時の音
     public AudioClip wall_paddleHit; //壁とPaddleに当たった時の音
     public Text countDownText; //カウントダウンを表示するテキスト
     public GameObject resultText; //ClearかGameOverかを入れるテキスト
 
+    private float initialVelocityY = 250f; //Y方向に打ち出す速度
     private Rigidbody2D rb2D; //RigidBody2Dを入れる変数
     private AudioSource audioSource; //AudioSourceを入れる変数
     private float initialVelocityX; //X方向に打ち出す速度
@@ -31,7 +31,7 @@ public class BallController : MonoBehaviour
 
         resultText.SetActive(false); //resultTextを非表示にする(デフォルト)
 
-        twoNumber = Random.Range(0, 2); //0か1をtwoNumberに入れる
+        /*twoNumber = Random.Range(0, 2); //0か1をtwoNumberに入れる
 
         switch (twoNumber)
         {
@@ -46,7 +46,7 @@ public class BallController : MonoBehaviour
                 }break;
 
             default: break;
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -95,7 +95,7 @@ public class BallController : MonoBehaviour
                         transform.parent = null; //親子関係を切る
                         rb2D.isKinematic = false; //iskinematicのチェックを外す
 
-                        rb2D.AddForce(new Vector2(initialVelocityX, initialVelocityY)); //ボールに力を加えて動かす
+                        rb2D.AddForce(new Vector2(0f, initialVelocityY)); //ボールに力を加えて動かす
 
                         SystemDaemon.isGameStarted = true; //ゲームを動かす
 

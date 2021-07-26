@@ -11,11 +11,47 @@ public class GameDirectorController : MonoBehaviour
     {
         switch (SystemDaemon.stageNumber) //1～6の数字
         {
-            case 1:
+            case 1: //Square
                 {
                     GameObject go = Instantiate(prefabs[SystemDaemon.stageNumber - 1]); //Prefabを出力する
-                    brickQuantity = 71; //ハートは71個
+                    brickQuantity = 15; //Squareは15個
+                }
+                break;
+
+            case 2: //Box
+                {
+                    GameObject go = Instantiate(prefabs[SystemDaemon.stageNumber - 1]); //Prefabを出力する
+                    brickQuantity = 21; //Boxは21個
+                }
+                break;
+
+            case 3: //Note
+                {
+                    GameObject go = Instantiate(prefabs[SystemDaemon.stageNumber - 1]); //Prefabを出力する
+                    brickQuantity = 22; //Noteは22個
+                }
+                break;
+
+            case 4: //Triangle
+                {
+                    GameObject go = Instantiate(prefabs[SystemDaemon.stageNumber - 1]); //Prefabを出力する
+                    brickQuantity = 25; //Triangleは25個
+                }
+                break;
+
+            case 5: //Star
+                {
+                    GameObject go = Instantiate(prefabs[SystemDaemon.stageNumber - 1]); //Prefabを出力する
+                    brickQuantity = 26; //Starは26個
                 }break;
+
+            case 6: //Heart
+                {
+                    GameObject go = Instantiate(prefabs[SystemDaemon.stageNumber - 1]); //Prefabを出力する
+                    brickQuantity = 71; //Heartは71個
+                }
+                break;
+            default:break;
         }
     }
 

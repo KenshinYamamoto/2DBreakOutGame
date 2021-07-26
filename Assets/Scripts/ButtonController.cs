@@ -21,6 +21,7 @@ public class ButtonController : MonoBehaviour
     public GameObject button1_4; //1-4Buttonを入れる変数
     public GameObject button1_5; //1-5Buttonを入れる変数
     public GameObject button1_6; //1-6Buttonを入れる変数
+    public GameObject backButton; //BackButtonを入れる変数
 
     private bool isAttentioned = false;
     private float attentionCount = 0.0f;
@@ -28,9 +29,13 @@ public class ButtonController : MonoBehaviour
     void Start()
     {
         if (!SystemDaemon.isStoried) //1度もストーリーが再生されていなかったら
+        {
             goStorySceneButton.SetActive(false); //ストーリーシーンに行くボタンを非表示にする
+        }
         else
+        {
             goStorySceneButton.SetActive(true); //ストーリーシーンに行くボタンを表示する
+        }
 
         //ボタンの非表示(デフォルト)
         button1_1.SetActive(false);
@@ -41,6 +46,7 @@ public class ButtonController : MonoBehaviour
         button1_6.SetActive(false);
 
         attentionImage.SetActive(false); //AttentionPanelを非表示にする(デフォルト)
+        backButton.SetActive(false); //BackButtonを非表示にする(デフォルト)
     }
 
     void Update()
@@ -72,6 +78,8 @@ public class ButtonController : MonoBehaviour
         button1_4.SetActive(true);
         button1_5.SetActive(true);
         button1_6.SetActive(true);
+
+        backButton.SetActive(true); //BackButtonの表示
 
         //クリアしてなかったら「済」を非表示にして、クリアしてたら表示させる
         if (!SystemDaemon.clear1_1)
@@ -207,5 +215,27 @@ public class ButtonController : MonoBehaviour
         SystemDaemon.isFromStoryButton = true;
 
         SystemDaemon.LoadScene("StoryScene");
+    }
+
+    public void OnBackButton()
+    {
+        //ステージのボタンの非表示
+        button1_1.SetActive(false);
+        button1_2.SetActive(false);
+        button1_3.SetActive(false);
+        button1_4.SetActive(false);
+        button1_5.SetActive(false);
+        button1_6.SetActive(false);
+
+        backButton.SetActive(false); //BackButtonの非表示
+
+        //ボタンの表示
+        goSelectionButton.SetActive(true);
+        goRuleSceneButton.SetActive(true);
+
+        if (SystemDaemon.isStoried) //1度もストーリーが再生されていなかったら
+        {
+            goStorySceneButton.SetActive(true); //ストーリーシーンに行くボタンを表示する
+        }
     }
 }
