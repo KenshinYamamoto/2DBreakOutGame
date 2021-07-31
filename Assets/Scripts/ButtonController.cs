@@ -7,6 +7,7 @@ public class ButtonController : MonoBehaviour
 {
     public GameObject goSelectionButton; //ステージ選択画面に行くボタン
     public GameObject goRuleSceneButton; //ルールシーンに行くボタン
+    public GameObject goSaveAndLoadSceneButton; //セーブ&ロードシーンに行くボタン
     public GameObject goStorySceneButton; //ストーリーシーンに行くボタン
     public GameObject attentionImage; //「解放されていません」を表示するパネル
     public GameObject panel1_1; //1-1Panelを入れる変数
@@ -28,7 +29,7 @@ public class ButtonController : MonoBehaviour
 
     void Start()
     {
-        if (!SystemDaemon.isStoried) //1度もストーリーが再生されていなかったら
+        if (!SystemDaemon.gameData.isStoried) //1度もストーリーが再生されていなかったら
         {
             goStorySceneButton.SetActive(false); //ストーリーシーンに行くボタンを非表示にする
         }
@@ -69,6 +70,7 @@ public class ButtonController : MonoBehaviour
         //ボタンの非表示
         goSelectionButton.SetActive(false);
         goRuleSceneButton.SetActive(false);
+        goSaveAndLoadSceneButton.SetActive(false);
         goStorySceneButton.SetActive(false);
 
         //ステージのボタンの表示
@@ -82,32 +84,32 @@ public class ButtonController : MonoBehaviour
         backButton.SetActive(true); //BackButtonの表示
 
         //クリアしてなかったら「済」を非表示にして、クリアしてたら表示させる
-        if (!SystemDaemon.clear1_1)
+        if (!SystemDaemon.gameData.clear1_1)
             panel1_1.SetActive(false);
         else
             button1_2.GetComponent<Image>().color = Color.white;
 
-        if (!SystemDaemon.clear1_2)
+        if (!SystemDaemon.gameData.clear1_2)
             panel1_2.SetActive(false);
         else
             button1_3.GetComponent<Image>().color = Color.white;
 
-        if (!SystemDaemon.clear1_3)
+        if (!SystemDaemon.gameData.clear1_3)
             panel1_3.SetActive(false);
         else
             button1_4.GetComponent<Image>().color = Color.white;
 
-        if (!SystemDaemon.clear1_4)
+        if (!SystemDaemon.gameData.clear1_4)
             panel1_4.SetActive(false);
         else
             button1_5.GetComponent<Image>().color = Color.white;
 
-        if (!SystemDaemon.clear1_5)
+        if (!SystemDaemon.gameData.clear1_5)
             panel1_5.SetActive(false);
         else
             button1_6.GetComponent<Image>().color = Color.white;
 
-        if (!SystemDaemon.clear1_6)
+        if (!SystemDaemon.gameData.clear1_6)
             panel1_6.SetActive(false);
     }
 
@@ -115,11 +117,12 @@ public class ButtonController : MonoBehaviour
     {
         SystemDaemon.stageNumber = 1; //ステージの番号を1に設定
 
-        if (!SystemDaemon.isStoried)
+        if (!SystemDaemon.gameData.isStoried)
         {
-            SystemDaemon.isStoried = true;
+            SystemDaemon.gameData.isStoried = true;
 
-            SystemDaemon.LoadScene("StoryScene");
+            LoadingController.Scene = "StoryScene";
+            SystemDaemon.LoadScene("Loading");
         }
         else
             SystemDaemon.LoadScene("GameScene");
@@ -127,7 +130,7 @@ public class ButtonController : MonoBehaviour
 
     public void On1_2Button() //1-2ボタンを押したとき
     {
-        if (!SystemDaemon.clear1_1)
+        if (!SystemDaemon.gameData.clear1_1)
         {
             isAttentioned = true;
 
@@ -143,7 +146,7 @@ public class ButtonController : MonoBehaviour
 
     public void On1_3Button() //1-3ボタンを押したとき
     {
-        if (!SystemDaemon.clear1_2)
+        if (!SystemDaemon.gameData.clear1_2)
         {
             isAttentioned = true;
 
@@ -159,7 +162,7 @@ public class ButtonController : MonoBehaviour
 
     public void On1_4Button() //1-4ボタンを押したとき
     {
-        if (!SystemDaemon.clear1_3)
+        if (!SystemDaemon.gameData.clear1_3)
         {
             isAttentioned = true;
 
@@ -175,7 +178,7 @@ public class ButtonController : MonoBehaviour
 
     public void On1_5Button() //1-5ボタンを押したとき
     {
-        if (!SystemDaemon.clear1_4)
+        if (!SystemDaemon.gameData.clear1_4)
         {
             isAttentioned = true;
 
@@ -191,7 +194,7 @@ public class ButtonController : MonoBehaviour
 
     public void On1_6Button() //1-6ボタンを押したとき
     {
-        if (!SystemDaemon.clear1_5)
+        if (!SystemDaemon.gameData.clear1_5)
         {
             isAttentioned = true;
 
@@ -205,19 +208,20 @@ public class ButtonController : MonoBehaviour
         }
     }
 
-    public void OnGoRuleSceneButton()
+    public void OnGoRuleSceneButton() //ルールシーンに行くボタン
     {
         SystemDaemon.LoadScene("RuleScene");
     }
 
-    public void OnGoStorySceneButton()
+    public void OnGoStorySceneButton() //ストーリーシーンに行くボタン
     {
         SystemDaemon.isFromStoryButton = true;
 
-        SystemDaemon.LoadScene("StoryScene");
+        LoadingController.Scene = "StoryScene";
+        SystemDaemon.LoadScene("Loading");
     }
 
-    public void OnBackButton()
+    public void OnBackButton() //戻るボタン
     {
         //ステージのボタンの非表示
         button1_1.SetActive(false);
@@ -232,10 +236,16 @@ public class ButtonController : MonoBehaviour
         //ボタンの表示
         goSelectionButton.SetActive(true);
         goRuleSceneButton.SetActive(true);
+        goSaveAndLoadSceneButton.SetActive(true);
 
-        if (SystemDaemon.isStoried) //1度もストーリーが再生されていなかったら
+        if (SystemDaemon.gameData.isStoried) //1度もストーリーが再生されていなかったら
         {
             goStorySceneButton.SetActive(true); //ストーリーシーンに行くボタンを表示する
         }
+    }
+
+    public void OnSaveAndLoadButton() //セーブ&ロードシーンに行くボタン
+    {
+        SystemDaemon.LoadScene("SaveAndLoadScene");
     }
 }

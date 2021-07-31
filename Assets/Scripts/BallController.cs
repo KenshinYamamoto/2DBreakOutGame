@@ -15,8 +15,7 @@ public class BallController : MonoBehaviour
     private float initialVelocityY = 250f; //Y方向に打ち出す速度
     private Rigidbody2D rb2D; //RigidBody2Dを入れる変数
     private AudioSource audioSource; //AudioSourceを入れる変数
-    private float initialVelocityX; //X方向に打ち出す速度
-    private int twoNumber; //打ち出す方向を左か右か決める変数
+    private int initialVelocityX; //X方向に打ち出す速度
     private float countDown = 3.0f; //カウントダウン(3秒前)
     private float countUp = 0f; //カウントアップ
     private bool isCalled = false; //1回だけ実行するための判定
@@ -30,23 +29,8 @@ public class BallController : MonoBehaviour
         resultText.GetComponent<Text>().text = ""; //resultTextをリセット
 
         resultText.SetActive(false); //resultTextを非表示にする(デフォルト)
-
-        /*twoNumber = Random.Range(0, 2); //0か1をtwoNumberに入れる
-
-        switch (twoNumber)
-        {
-            case 0: //左方向に打ち出そう
-                {
-                    initialVelocityX = Random.Range(-initialVelocityY * 2, -initialVelocityY / 2); //-20から-5の範囲で抽選する
-                }break;
-
-            case 1: //右方向に打ち出そう
-                {
-                    initialVelocityX = Random.Range(initialVelocityY / 2, initialVelocityY * 2); //5から20の範囲で抽選する
-                }break;
-
-            default: break;
-        }*/
+        
+        initialVelocityX = Random.Range(-5, 6); //-5から5の範囲で抽選する
     }
 
     // Update is called once per frame
@@ -95,7 +79,7 @@ public class BallController : MonoBehaviour
                         transform.parent = null; //親子関係を切る
                         rb2D.isKinematic = false; //iskinematicのチェックを外す
 
-                        rb2D.AddForce(new Vector2(0f, initialVelocityY)); //ボールに力を加えて動かす
+                        rb2D.AddForce(new Vector2(initialVelocityX, initialVelocityY)); //ボールに力を加えて動かす
 
                         SystemDaemon.isGameStarted = true; //ゲームを動かす
 
@@ -146,35 +130,34 @@ public class BallController : MonoBehaviour
                         {
                             case 1: //ステージ1-1だったら
                                 {
-                                    SystemDaemon.clear1_1 = true;
+                                    SystemDaemon.gameData.clear1_1 = true;
                                 }break;
                             case 2: //ステージ1-2だったら
                                 {
-                                    SystemDaemon.clear1_2 = true;
+                                    SystemDaemon.gameData.clear1_2 = true;
                                 }
                                 break;
                             case 3: //ステージ1-3だったら
                                 {
-                                    SystemDaemon.clear1_3 = true;
+                                    SystemDaemon.gameData.clear1_3 = true;
                                 }break;
                             case 4: //ステージ1-4だったら
                                 {
-                                    SystemDaemon.clear1_4 = true;
+                                    SystemDaemon.gameData.clear1_4 = true;
                                 }
                                 break;
                             case 5: //ステージ1-5だったら
                                 {
-                                    SystemDaemon.clear1_5 = true;
+                                    SystemDaemon.gameData.clear1_5 = true;
                                 }
                                 break;
                             case 6: //ステージ1-6だったら
                                 {
-                                    SystemDaemon.clear1_6= true;
+                                    SystemDaemon.gameData.clear1_6 = true;
                                 }
                                 break;
                             default:break;
                         }
-
                         isCalled = true; //ロックをかける
                     }
 

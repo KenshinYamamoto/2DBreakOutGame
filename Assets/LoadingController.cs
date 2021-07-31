@@ -22,7 +22,7 @@ public class LoadingController : MonoBehaviour
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	// シーン遷移先
-	static public string Scene = "Game";
+	static public string Scene = "StoryScene";
 
 	// 読み込みの状況
     private AsyncOperation Condition;

@@ -15,6 +15,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 // Scene
 using UnityEngine.SceneManagement;
@@ -47,29 +48,36 @@ public class SystemDaemon : SingletonMonoBehaviour<SystemDaemon>
 	// 以下に、シーンを跨いで保存したい変数を入れる。例：スコアなど
 	//static public int Score;
 
+
 	static public bool isGameStarted; //ゲームが始まっているかどうか
-
 	static public bool isStoried; //ストーリーを再生したかどうか
-
 	static public int stageNumber; //ステージの番号(1～6)
 
-	//ステージをクリアしているかどうか
-	static public bool clear1_1;
-	static public bool clear1_2;
-	static public bool clear1_3;
-	static public bool clear1_4;
-	static public bool clear1_5;
-	static public bool clear1_6;
-
 	static public bool isFromStoryButton; //「ストーリーを見る」ボタンから来たかどうか
+
+	[System.Serializable] //セーブするために必要な記述
+	public class GameData
+	{
+		//ステージをクリアしているかどうか
+		public bool clear1_1;
+		public bool clear1_2;
+		public bool clear1_3;
+		public bool clear1_4;
+		public bool clear1_5;
+		public bool clear1_6;
+
+		public bool isStoried = false; //ストーリーを見たかどうか
+	}
+	static public GameData gameData;
 
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// アウェイク ※ここは特殊なので慣れるまで変更・追加しないでください
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	void Awake() {
-        // すでに存在してたら破棄
-        if( this != Instance) {
+
+		// すでに存在してたら破棄
+		if ( this != Instance) {
             // 破棄
             Destroy( gameObject);
             return;
@@ -81,6 +89,8 @@ public class SystemDaemon : SingletonMonoBehaviour<SystemDaemon>
 		// 起動の時刻
 		TimeStamp = System.DateTime.Now.Year.ToString( "D4") + System.DateTime.Now.Month.ToString( "D2") + System.DateTime.Now.Day.ToString( "D2") + "-" +
 			System.DateTime.Now.Hour.ToString( "D2") + System.DateTime.Now.Minute.ToString( "D2") + System.DateTime.Now.Second.ToString( "D2");
+
+		gameData = new GameData();
 	}
 
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -98,16 +108,6 @@ public class SystemDaemon : SingletonMonoBehaviour<SystemDaemon>
 		isGameStarted = false; //ゲームが始まっているかどうか
 		stageNumber = 0; //ステージの番号(1～6)
 		isFromStoryButton = false; //「ストーリーを見る」ボタンから来たかどうか
-
-		isStoried = false; //ストーリーを見たかどうか
-
-		//ステージをクリアしているかどうか
-		clear1_1 = false;
-		clear1_2 = false;
-		clear1_3 = false;
-		clear1_4 = false;
-		clear1_5 = false;
-		clear1_6 = false;
 	}
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
