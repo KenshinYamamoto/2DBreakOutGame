@@ -9,6 +9,9 @@ public class BallController : MonoBehaviour
 
     public AudioClip brickHit; //ブロックに当たった時の音
     public AudioClip wall_paddleHit; //壁とPaddleに当たった時の音
+    public AudioClip countDownClip; //カウントダウン
+    public AudioClip clear; //クリア
+    public AudioClip gameOver; //ゲームオーバー
     public Text countDownText; //カウントダウンを表示するテキスト
     public GameObject resultText; //ClearかGameOverかを入れるテキスト
 
@@ -19,6 +22,7 @@ public class BallController : MonoBehaviour
     private float countDown = 3.0f; //カウントダウン(3秒前)
     private float countUp = 0f; //カウントアップ
     private bool isCalled = false; //1回だけ実行するための判定
+    
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +35,9 @@ public class BallController : MonoBehaviour
         resultText.SetActive(false); //resultTextを非表示にする(デフォルト)
         
         initialVelocityX = Random.Range(-5, 6); //-5から5の範囲で抽選する
+
+        audioSource.clip = countDownClip; //CountDownの音をセットする
+        audioSource.Play(); //音を再生する
     }
 
     // Update is called once per frame
@@ -97,6 +104,9 @@ public class BallController : MonoBehaviour
                 {
                     if (!isCalled)
                     {
+                        audioSource.clip = gameOver; //GameOverの音をセットする
+                        audioSource.Play(); //音を再生する
+
                         SystemDaemon.isGameStarted = false; //ゲームを止める
 
                         resultText.GetComponent<Text>().color = new Color(0f, 0f, 1f, 1f);//字の色を青にする
@@ -120,6 +130,9 @@ public class BallController : MonoBehaviour
                 {
                     if (!isCalled)
                     {
+                        audioSource.clip = clear; //CLEARの音をセットする
+                        audioSource.Play(); //音を再生する
+
                         SystemDaemon.isGameStarted = false; //ゲームを止める
 
                         resultText.GetComponent<Text>().color = new Color(1f, 1f, 0f, 1f);//字の色を黄にする

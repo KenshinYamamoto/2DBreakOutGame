@@ -16,15 +16,17 @@ public class StoryController : MonoBehaviour
     public Sprite[] kohakuImages; //大鳥こはくの絵を入れる配列　　　//0:ノーマル 1:目を閉じてる 2:怒ってる 3:驚いてる 4:笑ってる 5:苦笑い
     public Sprite[] misakiImages; //藤原みさきの絵を入れる配列      //0:ノーマル 1:目を閉じてる 2:怒ってる 3:驚いてる 4:困ってる 5:痛がってる
     public Sprite[] yukoImages; //神林ゆうこの絵を入れる配列        //0:ノーマル 1:目を閉じてる 2:驚いてる 3:怒ってる 4:困ってる 5:恥ずかしがってる？
+    public AudioClip[] audioClips; //AudioClips
+    public int displayspeed;
 
     private int serifNumber; //どのセリフを表示するかという変数
     private string displaySerif; //表示させる文字
     private int serifCharNumber; //何文字目を表示するかという変数
     private int speed; //表示させる速度
-    public int displayspeed;
     private bool isClicked = false; //クリックしたかどうかの判定
     private bool isStopped = false; //止めるかどうかの判定
     private bool isCharClicked = false; //セリフの文字を最後まで飛ばすかどうかの判定
+    private AudioSource audioSource; //AudioSource
 
     private string[] serifs =
     {
@@ -57,6 +59,8 @@ public class StoryController : MonoBehaviour
         yukoImage.SetActive(false); //YukoImageを非表示にする(デフォルト)
         misakiImage.SetActive(false); //MisakiImageを非表示にする(デフォルト)
 
+        audioSource = GetComponent<AudioSource>();
+
         kohakuImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(350f, 0f); //位置を更新(デフォルト)
         misakiImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(350f, 0f); //位置を更新(デフォルト)
         yukoImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(350f, 0f); //位置を更新(デフォルト)
@@ -80,6 +84,9 @@ public class StoryController : MonoBehaviour
                     if (!isCharClicked) //文字の追加中
                     {
                         displaySerif += serifs[serifNumber][serifCharNumber]; //1文字ずつ追加していく
+
+                        //SEを鳴らす
+                        audioSource.PlayOneShot(audioClips[0]);
 
                         serifCharNumber++; //次の文字にする
                     }
@@ -302,6 +309,9 @@ public class StoryController : MonoBehaviour
 
     public void OnSkipButton() //スキップボタンが押されたら
     {
+        //SEを鳴らす
+        audioSource.PlayOneShot(audioClips[1]);
+
         isStopped = true; //止める
 
         attentionImage.SetActive(true); //attentionImageを表示する

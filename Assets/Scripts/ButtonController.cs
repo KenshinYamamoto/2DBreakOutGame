@@ -23,9 +23,13 @@ public class ButtonController : MonoBehaviour
     public GameObject button1_5; //1-5Buttonを入れる変数
     public GameObject button1_6; //1-6Buttonを入れる変数
     public GameObject backButton; //BackButtonを入れる変数
+    public GameObject titlePanel; //TitlePanelを入れる変数
+    public Sprite[] titleSprites; //TitleSpritesを入れる配列
+    public AudioClip[] audioClips; //SEを入れる配列
 
     private bool isAttentioned = false;
     private float attentionCount = 0.0f;
+    private AudioSource audioSourse;
 
     void Start()
     {
@@ -48,6 +52,8 @@ public class ButtonController : MonoBehaviour
 
         attentionImage.SetActive(false); //AttentionPanelを非表示にする(デフォルト)
         backButton.SetActive(false); //BackButtonを非表示にする(デフォルト)
+
+        audioSourse = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -67,6 +73,9 @@ public class ButtonController : MonoBehaviour
 
     public void OnGoSelectionButton() //ステージ選択画面に行くボタンが押されたら
     {
+        //SEを鳴らす
+        audioSourse.PlayOneShot(audioClips[0]);
+
         //ボタンの非表示
         goSelectionButton.SetActive(false);
         goRuleSceneButton.SetActive(false);
@@ -82,6 +91,7 @@ public class ButtonController : MonoBehaviour
         button1_6.SetActive(true);
 
         backButton.SetActive(true); //BackButtonの表示
+        titlePanel.GetComponent<Image>().sprite = titleSprites[1]; //CourseSelectの絵に切り替える
 
         //クリアしてなかったら「済」を非表示にして、クリアしてたら表示させる
         if (!SystemDaemon.gameData.clear1_1)
@@ -223,6 +233,9 @@ public class ButtonController : MonoBehaviour
 
     public void OnBackButton() //戻るボタン
     {
+        //SEを鳴らす
+        audioSourse.PlayOneShot(audioClips[1]);
+
         //ステージのボタンの非表示
         button1_1.SetActive(false);
         button1_2.SetActive(false);
@@ -232,6 +245,7 @@ public class ButtonController : MonoBehaviour
         button1_6.SetActive(false);
 
         backButton.SetActive(false); //BackButtonの非表示
+        titlePanel.GetComponent<Image>().sprite = titleSprites[0]; //Titletの絵に切り替える
 
         //ボタンの表示
         goSelectionButton.SetActive(true);

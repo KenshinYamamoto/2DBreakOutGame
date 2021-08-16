@@ -18,6 +18,7 @@ public class SaveSceneController : MonoBehaviour
     private string filePath;
     private bool isInformed = false; //知らせるかどうか
     private float informCount = 0f; //知らせる時間
+    private AudioSource audioSource; //AudioSource
 
     private void Awake()
     {
@@ -29,6 +30,8 @@ public class SaveSceneController : MonoBehaviour
         informImage.SetActive(false); //知らせるイメージを非表示(デフォルト)
         saveAttentionImage.SetActive(false); //セーブするかどうかのイメージを非表示(デフォルト)
         loadAttentionImage.SetActive(false); //ロードするかどうかのイメージを非表示(デフォルト)
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -49,6 +52,9 @@ public class SaveSceneController : MonoBehaviour
 
     public void OnSaveButton()
     {
+        //SEを鳴らす
+        audioSource.PlayOneShot(audioSource.clip);
+
         //各種ボタンを非表示にする
         saveButton.SetActive(false);
         loadButton.SetActive(false);
@@ -59,6 +65,9 @@ public class SaveSceneController : MonoBehaviour
 
     public void SaveYesButton()
     {
+        //SEを鳴らす
+        audioSource.PlayOneShot(audioSource.clip);
+
         string json = JsonUtility.ToJson(SystemDaemon.gameData);
 
         StreamWriter streamWriter = new StreamWriter(filePath);
@@ -79,6 +88,9 @@ public class SaveSceneController : MonoBehaviour
 
     public void SaveNoButton()
     {
+        //SEを鳴らす
+        audioSource.PlayOneShot(audioSource.clip);
+
         //各種ボタンを表示する
         saveButton.SetActive(true);
         loadButton.SetActive(true);
@@ -90,6 +102,9 @@ public class SaveSceneController : MonoBehaviour
 
     public void OnLoadButton()
     {
+        //SEを鳴らす
+        audioSource.PlayOneShot(audioSource.clip);
+
         //各種ボタンを非表示にする
         saveButton.SetActive(false);
         loadButton.SetActive(false);
@@ -100,6 +115,9 @@ public class SaveSceneController : MonoBehaviour
 
     public void LoadYesButton()
     {
+        //SEを鳴らす
+        audioSource.PlayOneShot(audioSource.clip);
+
         if (File.Exists(filePath))
         {
             StreamReader streamReader = new StreamReader(filePath);
@@ -123,6 +141,9 @@ public class SaveSceneController : MonoBehaviour
 
     public void LoadNoButton()
     {
+        //SEを鳴らす
+        audioSource.PlayOneShot(audioSource.clip);
+
         //各種ボタンを表示する
         saveButton.SetActive(true);
         loadButton.SetActive(true);
